@@ -107,6 +107,17 @@ These landed after the original v0 and are now part of current submission behavi
 
 ---
 
+## Open Post-v0 Submission API Follow-ups
+
+These are newer submission-adjacent API contract tasks that sit on top of the
+merged v0 foundation.
+
+| Area | Update | Notes |
+|---|---|---|
+| Submission field citations contract | Consolidate Citation Schema for Submissions and Reviews (API Level) (#435) | API-only translation layer task: remove flat `aiSource*` response fields from submission field DTOs and expose unified `citations[]`, mapped from existing `submission_fields` source columns without changing DB schema or repositories. Also confirm submission SSE payloads do not leak a divergent citation contract. |
+| Submission document removal | Remove submission documents with detach/remove modes and field-level stale metadata | Add `DELETE /api/submissions/:id/documents/:documentId` with required `mode=detach|remove`. `detach` removes the submission association only; `remove` removes the association and soft-deletes the underlying document from the library. Keep impacted extracted values visible, persist field-level stale metadata directly on `submission_fields`, and leave re-extraction as a manual follow-up. |
+
+---
 ## Unmerged Phase 4 Branch Snapshot
 
 Local/remote branches detected but not merged into `main`:
